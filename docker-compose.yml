@@ -1,0 +1,54 @@
+version: "3.1"
+
+services:
+  database:
+    image: mysql:8.2.0
+    container_name: db_python
+    environment:
+      MYSQL_DATABASE: masiva
+      MYSQL_USER: masiva
+      MYSQL_PASSWORD: masiva
+      MYSQL_ROOT_PASSWORD: masiva
+    networks:
+      - local
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: '/usr/bin/mysql --user=masiva --password=masiva --database=masiva --execute "SELECT * FROM test_table;"'
+      interval: 30s
+      timeout: 10s
+      retries: 6
+
+  python_backend:
+    depends_on:
+      database:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: python-api
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app/:/code/app/
+    networks:
+      - local
+    links:
+      - database
+    environment:
+      API_KEY: 4ohFMy43zYpCNgIqkVrfoA==OvgOVaKBXbzmccX3
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: masiva
+      DB_PASSWORD: masiva
+      DB_USER: masiva
+networks:
+  local:
+volumes:
+  db-data:
