@@ -42,7 +42,7 @@ services:
     links:
       - database
     environment:
-      API_KEY: 4ohFMy43zYpCNgIqkVrfoA==OvgOVaKBXbzmccX3
+      API_KEY: 
       DB_HOST: database
       DB_PORT: 3306
       DB_NAME: masiva
