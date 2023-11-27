@@ -2,11 +2,10 @@
 
 Clonar por Github
 
-Si se clona desde un repositorio en github habra que colocar una api key en el docker compose que sera enviada en el correo
 
 ![Image1](image-8.png)
 
-Donde dice "AQUI" va la API_KEY envida en el correo
+
 
 ## Estructura
 
