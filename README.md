@@ -114,7 +114,7 @@ Para esta consulta se tiene la siguiente informacion
 
 ![Image8](image-7.png)
 
-Si no se save alguna id de los datos consultar la siguiente url
+Todas las id de los datos, consultar la siguiente url
 
 > http://127.0.0.1:8000/api/data/all/
 
